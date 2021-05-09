@@ -18,7 +18,7 @@ function App() {
 useEffect(()=>{
   // this code will fire when the app.js loads
   db.collection('todos').orderBy('timestamp','asc').onSnapshot(snapshot=>{
-    setTodos(snapshot.docs.map(doc=>doc.data().todo))
+    setTodos(snapshot.docs.map(doc=>({id : doc.id , todo : doc.data().todo})))
   })
 },[]);
 
@@ -70,7 +70,7 @@ useEffect(()=>{
       {  /* Print the data from the array */}
         {
           todos.map(todo=>(
-           <Todo  text={todo} />
+           <Todo  todo={todo} />
           ))
         }
         
